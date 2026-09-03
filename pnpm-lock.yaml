@@ -150,6 +150,22 @@ importers:
         specifier: ^4.1.10
         version: 4.1.10(@types/node@26.1.1)(vite@8.0.16(@types/node@26.1.1)(jiti@2.7.0)(yaml@2.9.0))
 
+  examples/mapper:
+    dependencies:
+      ts-content-mapper:
+        specifier: workspace:*
+        version: link:../..
+
+  examples/project:
+    dependencies:
+      demo-content-mapper:
+        specifier: workspace:*
+        version: link:../mapper
+    devDependencies:
+      typescript:
+        specifier: next
+        version: 7.1.0-dev.20260902.1
+
 packages:
 
   '@andrewbranch/untar.js@1.0.3':
@@ -944,8 +960,20 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@typescript/typescript-darwin-arm64@7.1.0-dev.20260902.1':
+    resolution: {integrity: sha512-CA5l2WDJRJrk0AkyBBMorxT/oAbsXmjB7LneTtc88Ks000rs3iGhsWz/qVJOP5ag0eGdbGRqtTwvOg7nz58LdA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [darwin]
+
   '@typescript/typescript-darwin-x64@7.0.2':
     resolution: {integrity: sha512-SZ9xZInqApNlNGc9s0W1VSsktYSOe9cFqNOIqmN1Gs8SmkjKZYFt017G4VwPxASInODuAdbTW7sXiFUf893RgA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@typescript/typescript-darwin-x64@7.1.0-dev.20260902.1':
+    resolution: {integrity: sha512-jBiYLWdG8LHgixue3ceaiZvT+M2pFOh0Jb1ej35PTQboiPpDSFN5vzZ15/AKo6ZQ3OYjNEKP2s5XDyZGuSYNYg==}
     engines: {node: '>=16.20.0'}
     cpu: [x64]
     os: [darwin]
@@ -968,8 +996,20 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@typescript/typescript-linux-arm64@7.1.0-dev.20260902.1':
+    resolution: {integrity: sha512-/qsGWNMazEckdc3IIBzfvjCWkDFBvY62X/gvI6XZdDiKeBXkutrsRDMbk6uSQdahbNP2nrbVKADb6DXDsRelMA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [linux]
+
   '@typescript/typescript-linux-arm@7.0.2':
     resolution: {integrity: sha512-gffT3xPz9sR7j/YJExkyPntrI0P2EP9XbOyWzth2/Gs0RstK+90RBcO0ncXoXy/beYll1SXw846Nf2zdnEz0QQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm]
+    os: [linux]
+
+  '@typescript/typescript-linux-arm@7.1.0-dev.20260902.1':
+    resolution: {integrity: sha512-0kI7EfWXjyB13BxiAcARVsB0eKJJQh8pMczwPaKBcIE5+VAqbv7AamVepLMpsv/oKjsL7+f5HryXG+W6HwHwQQ==}
     engines: {node: '>=16.20.0'}
     cpu: [arm]
     os: [linux]
@@ -1010,6 +1050,12 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@typescript/typescript-linux-x64@7.1.0-dev.20260902.1':
+    resolution: {integrity: sha512-hU6qGOIoP7IGwks9evV6tSo00/Ltf6O8zHXNfbtRtZCRqZApcQqvZO6LeQ+ZXSMW8EB2E8F8oAMyB2Cn/FfXDw==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [linux]
+
   '@typescript/typescript-netbsd-arm64@7.0.2':
     resolution: {integrity: sha512-+polYF4MF04aPpO5FTkHran9yUQDSXqy5GiSDKpsll5jy3l3+g9QLhpf39T+ePtefhXLOGrLl0QIjkQP6VnelA==}
     engines: {node: '>=16.20.0'}
@@ -1046,8 +1092,20 @@ packages:
     cpu: [arm64]
     os: [win32]
 
+  '@typescript/typescript-win32-arm64@7.1.0-dev.20260902.1':
+    resolution: {integrity: sha512-v/6XoF+t5wRoiiFa34SPPVXWAy9G3M84mQlKa24z2jy38F1pxwqm41yenvIiMjcPIK1XjwBjeF1kHqr1J43Ziw==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [win32]
+
   '@typescript/typescript-win32-x64@7.0.2':
     resolution: {integrity: sha512-0BQ3HkAHHlKLSp1qRvf3SUhGpGsDuhB/jgFw75guyqbxJqEaS0Cw/VFO8i2nHglJUzQCRtMMR/IBAKE3ETMC4g==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [win32]
+
+  '@typescript/typescript-win32-x64@7.1.0-dev.20260902.1':
+    resolution: {integrity: sha512-GWmDz4WWi+Fl6OHoLIsZ3LKvGN1zOERPXHFxGhkeVqf/vDiYPi4AHmMpIJC3I5zLc4Ekxavgp0acdEKXjb2GNA==}
     engines: {node: '>=16.20.0'}
     cpu: [x64]
     os: [win32]
@@ -2502,6 +2560,11 @@ packages:
     engines: {node: '>=16.20.0'}
     hasBin: true
 
+  typescript@7.1.0-dev.20260902.1:
+    resolution: {integrity: sha512-Q+H2lm/zA8dhOyxUNmIIAqdAB9OkMMuDKsUg8hsTKBpkFLEtlHj8KzWSxuAEiSSgopI4cpltGeTmp+It2LuASQ==}
+    engines: {node: '>=16.20.0'}
+    hasBin: true
+
   ufo@1.6.4:
     resolution: {integrity: sha512-JFNbkD1Svwe0KvGi8GOeLcP4kAWQ609twvCdcHxq1oSL8svv39ZuSvajcD8B+5D0eL4+s1Is2D/O6KN3qcTeRA==}
 
@@ -3373,7 +3436,13 @@ snapshots:
   '@typescript/typescript-darwin-arm64@7.0.2':
     optional: true
 
+  '@typescript/typescript-darwin-arm64@7.1.0-dev.20260902.1':
+    optional: true
+
   '@typescript/typescript-darwin-x64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-darwin-x64@7.1.0-dev.20260902.1':
     optional: true
 
   '@typescript/typescript-freebsd-arm64@7.0.2':
@@ -3385,7 +3454,13 @@ snapshots:
   '@typescript/typescript-linux-arm64@7.0.2':
     optional: true
 
+  '@typescript/typescript-linux-arm64@7.1.0-dev.20260902.1':
+    optional: true
+
   '@typescript/typescript-linux-arm@7.0.2':
+    optional: true
+
+  '@typescript/typescript-linux-arm@7.1.0-dev.20260902.1':
     optional: true
 
   '@typescript/typescript-linux-loong64@7.0.2':
@@ -3406,6 +3481,9 @@ snapshots:
   '@typescript/typescript-linux-x64@7.0.2':
     optional: true
 
+  '@typescript/typescript-linux-x64@7.1.0-dev.20260902.1':
+    optional: true
+
   '@typescript/typescript-netbsd-arm64@7.0.2':
     optional: true
 
@@ -3424,7 +3502,13 @@ snapshots:
   '@typescript/typescript-win32-arm64@7.0.2':
     optional: true
 
+  '@typescript/typescript-win32-arm64@7.1.0-dev.20260902.1':
+    optional: true
+
   '@typescript/typescript-win32-x64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-win32-x64@7.1.0-dev.20260902.1':
     optional: true
 
   '@ungap/structured-clone@1.4.0': {}
@@ -5024,6 +5108,16 @@ snapshots:
       '@typescript/typescript-sunos-x64': 7.0.2
       '@typescript/typescript-win32-arm64': 7.0.2
       '@typescript/typescript-win32-x64': 7.0.2
+
+  typescript@7.1.0-dev.20260902.1:
+    optionalDependencies:
+      '@typescript/typescript-darwin-arm64': 7.1.0-dev.20260902.1
+      '@typescript/typescript-darwin-x64': 7.1.0-dev.20260902.1
+      '@typescript/typescript-linux-arm': 7.1.0-dev.20260902.1
+      '@typescript/typescript-linux-arm64': 7.1.0-dev.20260902.1
+      '@typescript/typescript-linux-x64': 7.1.0-dev.20260902.1
+      '@typescript/typescript-win32-arm64': 7.1.0-dev.20260902.1
+      '@typescript/typescript-win32-x64': 7.1.0-dev.20260902.1
 
   ufo@1.6.4: {}
 

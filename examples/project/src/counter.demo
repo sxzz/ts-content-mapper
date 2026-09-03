@@ -1,0 +1,8 @@
+<template>
+  <button>Count: {count}</button>
+</template>
+
+<script>
+export const count: number = 1
+export const label = `Count: ${count}`
+</script>

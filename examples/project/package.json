@@ -1,0 +1,14 @@
+{
+  "name": "demo-content-mapper-example",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "check": "tsc --noEmit --runExternalCode"
+  },
+  "dependencies": {
+    "demo-content-mapper": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "next"
+  }
+}

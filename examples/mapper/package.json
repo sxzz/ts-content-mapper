@@ -1,0 +1,21 @@
+{
+  "name": "demo-content-mapper",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": "^22.18.0 || >=24.11.0"
+  },
+  "dependencies": {
+    "ts-content-mapper": "workspace:*"
+  },
+  "typescript": {
+    "contentMapper": {
+      "exec": [
+        "node",
+        "./src/index.ts"
+      ],
+      "compilerOptions": [],
+      "dynamicConfig": false
+    }
+  }
+}

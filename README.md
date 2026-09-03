@@ -101,6 +101,9 @@ Run TypeScript with permission to start the mapper process:
 tsc --noEmit --runExternalCode
 ```
 
+A runnable `.demo` mapper and consuming project are available in
+[examples](./examples).
+
 ## Mapping builder
 
 The virtual output is sparse: text appended with `append()` is synthesized and
