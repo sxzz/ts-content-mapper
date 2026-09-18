@@ -28,6 +28,7 @@
     "json-rpc",
     "sdk"
   ],
+  "sideEffects": false,
   "exports": {
     ".": "./dist/index.mjs",
     "./package.json": "./package.json"
