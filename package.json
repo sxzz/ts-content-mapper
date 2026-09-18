@@ -2,7 +2,13 @@
   "name": "ts-content-mapper",
   "type": "module",
   "version": "0.1.0",
-  "packageManager": "pnpm@12.3.1",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.5.0",
+      "onFail": "download"
+    }
+  },
   "description": "Type-safe SDK for building TypeScript 7 content mappers",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
