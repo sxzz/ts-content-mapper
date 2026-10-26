@@ -56,7 +56,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "vscode-jsonrpc": "^9.0.2"
+    "vscode-jsonrpc": "^10.0.0"
   },
   "devDependencies": {
     "@sxzz/eslint-config": "^8.3.2",
