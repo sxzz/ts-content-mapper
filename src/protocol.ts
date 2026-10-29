@@ -4,7 +4,6 @@ export type PositionEncoding = 'utf-8' | 'utf-16'
 export interface InitializeParams {
   /** BCP 47 locale for diagnostics authored by the mapper. */
   locale?: string
-  /** Encodings accepted by the TypeScript host. */
   positionEncodings: PositionEncoding[]
 }
 
@@ -91,10 +90,7 @@ export const SpanMapFeature = {
 
 export type SpanMapFeatures = number
 
-/**
- * `[virtualStart, virtualLength, originalStart, originalLength, kind,
- * features?]`. Omitting features means {@link SpanMapFeature.All}.
- */
+/** Omitting features means {@link SpanMapFeature.All}. */
 export type SpanMapping = readonly [
   virtualStart: number,
   virtualLength: number,
@@ -117,10 +113,6 @@ export interface UnusedExpectDirectiveDiagnostic {
   messageText: string
 }
 
-/**
- * `[originalStart, originalLength, virtualStart, virtualEnd, policy,
- * unusedExpectDirectiveIndex?]`.
- */
 export type MappedDiagnosticDirective = readonly [
   originalStart: number,
   originalLength: number,
