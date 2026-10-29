@@ -1,7 +1,7 @@
 {
   "name": "ts-content-mapper",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Type-safe SDK for building TypeScript 7 content mappers",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
