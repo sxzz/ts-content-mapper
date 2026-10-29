@@ -126,6 +126,10 @@ export declare function stringIndexToPosition(_: string, _: number, _: PositionE
 // #endregion
 
 // #region Variables
+export declare const DiagnosticDirectivePolicy: {
+  readonly Ignore: 0;
+  readonly Expect: 1;
+};
 export declare const SpanMapFeature: {
   readonly None: 0;
   readonly Hover: 1;
@@ -149,6 +153,11 @@ export declare const SpanMapFeature: {
   readonly DocumentSymbols: 262_144;
   readonly CodeLens: 524_288;
   readonly All: 1_048_575;
+};
+export declare const SpanMapKind: {
+  readonly Verbatim: 0;
+  readonly Atom: 1;
+  readonly Alias: 2;
 };
 // #endregion
 

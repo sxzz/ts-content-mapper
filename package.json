@@ -2,13 +2,6 @@
   "name": "ts-content-mapper",
   "type": "module",
   "version": "0.1.0",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "12.5.0",
-      "onFail": "download"
-    }
-  },
   "description": "Type-safe SDK for building TypeScript 7 content mappers",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
@@ -43,6 +36,13 @@
   "engines": {
     "node": "^22.18.0 || >=24.11.0"
   },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.16.1",
+      "onFail": "download"
+    }
+  },
   "scripts": {
     "lint": "eslint --cache .",
     "lint:fix": "pnpm run lint --fix",
@@ -59,18 +59,18 @@
     "vscode-jsonrpc": "^10.0.0"
   },
   "devDependencies": {
-    "@sxzz/eslint-config": "^8.3.2",
-    "@sxzz/prettier-config": "^2.3.2",
-    "@types/node": "^26.1.1",
-    "@typescript/native-preview": "npm:typescript@~7.0.2",
-    "bumpp": "^12.0.0",
-    "eslint": "^10.8.0",
-    "prettier": "^3.9.6",
-    "tsdown": "^0.22.14",
-    "tsdown-preset-sxzz": "^0.7.0",
-    "tsnapi": "^1.4.2",
+    "@sxzz/eslint-config": "^8.8.0",
+    "@sxzz/prettier-config": "^2.3.3",
+    "@types/node": "^26.6.6",
+    "bumpp": "^12.3.0",
+    "eslint": "^10.13.0",
+    "prettier": "^3.9.10",
+    "tsdown": "^0.23.3",
+    "tsdown-preset-sxzz": "^0.7.1",
+    "tsnapi": "^1.5.0",
     "typescript": "~6.0.3",
-    "vitest": "^5.0.0"
+    "typescript-next": "npm:typescript@7.1.0-beta",
+    "vitest": "^5.0.5"
   },
   "prettier": "@sxzz/prettier-config"
 }
