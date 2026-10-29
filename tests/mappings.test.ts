@@ -54,6 +54,47 @@ describe('MappedCodeBuilder', () => {
     })
   })
 
+  test('does not merge verbatim mappings across gaps or feature changes', () => {
+    const output = new MappedCodeBuilder('abcdef')
+      .appendVerbatim(0, 1)
+      .append(';')
+      .appendVerbatim(1, 2)
+      .appendVerbatim(3, 4)
+      .appendVerbatim(4, 5, SpanMapFeature.Hover)
+      .build('.ts')
+
+    expect(output.mappings).toEqual([
+      [0, 1, 0, 1, SpanMapKind.Verbatim],
+      [2, 1, 1, 1, SpanMapKind.Verbatim],
+      [3, 1, 3, 1, SpanMapKind.Verbatim],
+      [4, 1, 4, 1, SpanMapKind.Verbatim, SpanMapFeature.Hover],
+    ])
+  })
+
+  test('omits empty mappings and passes diagnostic directives through', () => {
+    const diagnosticDirectives = {
+      unusedExpectDirectiveDiagnostics: [],
+      directives: [],
+    }
+
+    expect(new MappedCodeBuilder('').append('x').build('.ts')).toEqual({
+      text: 'x',
+      extension: '.ts',
+    })
+    expect(
+      new MappedCodeBuilder('').build('.ts', { diagnosticDirectives }),
+    ).toEqual({ text: '', extension: '.ts', diagnosticDirectives })
+  })
+
+  test('rejects invalid source ranges', () => {
+    const builder = new MappedCodeBuilder('source')
+
+    expect(() => builder.appendVerbatim(3, 2)).toThrow(RangeError)
+    expect(() => builder.appendVerbatim(0, 7)).toThrow(RangeError)
+    expect(() => builder.appendVerbatim(0.5, 2)).toThrow(RangeError)
+    expect(() => builder.appendVerbatim(-1, 2)).toThrow(RangeError)
+  })
+
   test('rejects incorrect verbatim content', () => {
     expect(() =>
       new MappedCodeBuilder('source').appendMapped('changed', 0, 6, {

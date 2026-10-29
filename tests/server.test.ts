@@ -1,9 +1,14 @@
 import { PassThrough } from 'node:stream'
 import { expect, test, vi } from 'vitest'
-import { createMessageConnection } from 'vscode-jsonrpc/node'
+import {
+  CancellationTokenSource,
+  createMessageConnection,
+  type MessageConnection,
+} from 'vscode-jsonrpc/node'
 import {
   MappedCodeBuilder,
   runContentMapper,
+  type ContentMapperDefinition,
   type InitializeResult,
   type OpenProjectResult,
   type TransformResult,
@@ -123,3 +128,104 @@ test('does not require an openProject callback for stateless mappers', async () 
     server.dispose()
   }
 })
+
+test('rejects position encodings the host did not offer', async () => {
+  await withMapper(
+    { diagnosticSource: 'utf8', positionEncoding: 'utf-8', transform },
+    async (client) => {
+      await expect(
+        client.sendRequest('initialize', { positionEncodings: ['utf-16'] }),
+      ).rejects.toThrow(/did not offer "utf-8"/)
+    },
+  )
+  await withMapper({ diagnosticSource: 'demo', transform }, async (client) => {
+    await expect(
+      client.sendRequest('initialize', { positionEncodings: [] }),
+    ).rejects.toThrow(/supported position encoding/)
+  })
+})
+
+test('rejects requests for uninitialized sessions and unknown projects', async () => {
+  await withMapper({ diagnosticSource: 'demo', transform }, async (client) => {
+    await expect(
+      client.sendRequest('openProject', openProjectParams),
+    ).rejects.toThrow(/not been initialized/)
+
+    await client.sendRequest('initialize', { positionEncodings: ['utf-16'] })
+    await client.sendRequest('openProject', openProjectParams)
+    await client.sendRequest('closeProject', { projectHandle: 'p1' })
+    await expect(
+      client.sendRequest('transform', transformParams),
+    ).rejects.toThrow(/Unknown project handle "p1"/)
+  })
+})
+
+test('aborts the signal when the client cancels a request', async () => {
+  const started = deferred()
+  const aborted = deferred()
+  await withMapper(
+    {
+      diagnosticSource: 'demo',
+      async transform(params, context) {
+        context.signal.addEventListener('abort', () => aborted.resolve())
+        started.resolve()
+        await aborted.promise
+        return transform(params)
+      },
+    },
+    async (client) => {
+      await client.sendRequest('initialize', { positionEncodings: ['utf-16'] })
+      await client.sendRequest('openProject', openProjectParams)
+      const source = new CancellationTokenSource()
+      const request = client
+        .sendRequest('transform', transformParams, source.token)
+        .catch(() => {})
+      await started.promise
+      source.cancel()
+      await aborted.promise
+      await request
+    },
+  )
+})
+
+const openProjectParams = {
+  configFileName: '',
+  projectHandle: 'p1',
+  compilerOptions: {},
+}
+
+const transformParams = {
+  fileName: '/source.demo',
+  content: 'export {}',
+  projectHandle: 'p1',
+}
+
+function transform(params: { content: string }): TransformResult {
+  return { text: params.content, extension: '.ts' }
+}
+
+function deferred(): { promise: Promise<void>; resolve: () => void } {
+  let resolve!: () => void
+  const promise = new Promise<void>((r) => (resolve = r))
+  return { promise, resolve }
+}
+
+async function withMapper(
+  definition: ContentMapperDefinition,
+  run: (client: MessageConnection) => Promise<void>,
+): Promise<void> {
+  const clientToServer = new PassThrough()
+  const serverToClient = new PassThrough()
+  const server = runContentMapper(definition, {
+    input: clientToServer,
+    output: serverToClient,
+  })
+  const client = createMessageConnection(serverToClient, clientToServer)
+  client.listen()
+  try {
+    await run(client)
+  } finally {
+    client.dispose()
+    server.dispose()
+  }
+}

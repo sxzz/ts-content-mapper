@@ -80,7 +80,6 @@ export class MappedCodeBuilder {
     originalEnd: number,
     features: SpanMapFeatures = SpanMapFeature.All,
   ): this {
-    assertSourceRange(this.originalText, originalStart, originalEnd)
     return this.appendMapped(
       this.originalText.slice(originalStart, originalEnd),
       originalStart,
@@ -125,7 +124,6 @@ export class MappedCodeBuilder {
     return this.appendAtom(text, originalPosition, originalPosition, features)
   }
 
-  /** Append text with explicit mapping kind and language-service features. */
   appendMapped(
     text: string,
     originalStart: number,
